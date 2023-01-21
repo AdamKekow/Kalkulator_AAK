@@ -46,6 +46,7 @@ void Run(void) {
 		std::getline(std::cin,input);
 		if(input=="")std::getline(std::cin, input);
 		input.erase(remove(input.begin(), input.end(), ' '), input.end());//remove blankspaces
+		if (input[0] == '-' || input[0] == '+') input = "0"+input;//fix sign at start
 		TreePart one;
 		one.content = input;
 		one.cut();

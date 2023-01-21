@@ -152,9 +152,7 @@ public:
 				}
 				else 
 				{
-				
-				
-				
+
 				}
 			}
 			break;
@@ -176,7 +174,7 @@ public:
 		case (action::ln):
 		{
 			polynomial tmp{};
-			if (branch[0].algebralic().other.length() > 0) { //multi dote code, objectivly objective code
+			if (branch[0].algebralic().other.length() > 0) { 
 			
 			}
 			wy = (branch[0].diriv() / branch[0].algebralic());
