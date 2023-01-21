@@ -136,7 +136,7 @@ public:
 		case (action::power):
 			if (branch[0].content.size()==0)
 			{
-				if (true)
+				if (branch[1].content.size() == 0)
 				{
 
 				}
@@ -157,6 +157,16 @@ public:
 			return wy;
 		}
 			break;
+		case (action::ln):
+		{
+			polynomial tmp;
+			if (branch[0].algebralic().other.length() > 0) { //multi dote code, objectivly objective code
+			
+			}
+			wy = (branch[0].diriv() / branch[0].algebralic());
+			return wy;
+		}
+		break;
 		default:
 			break;
 		}
