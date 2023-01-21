@@ -134,24 +134,40 @@ public:
 			return wy;
 			break;
 		case (action::power):
-			if (branch[0].content.size()==0)
+			if (branch[0].algebralic().other.length() == 0)
 			{
-				if (branch[1].content.size() == 0)
+				if (branch[1].algebralic().other.length() == 0)
 				{
-
+					polynomial tmp{};
+					polynomial::Number_power_pair tmp2{};
+					tmp= branch[0].algebralic() ^ branch[1].algebralic();
+					for (auto i = 0; i < tmp.poly.size(); i++) 
+					{
+						tmp2.power = tmp.poly[i].power - 1;
+						tmp2.number = tmp.poly[i].number * tmp.poly[i].power;
+						wy.poly.push_back(tmp2);
+					
+					}
+					return wy;
+				}
+				else 
+				{
+				
+				
+				
 				}
 			}
 			break;
 		case (action::sinus):
 			{
-			polynomial tmp;
+			polynomial tmp{};
 			tmp.other = "+cos(" + branch[0].content + ")";
 			wy = (branch[0].diriv() * tmp);
 			return wy;
 			}
 		case (action::cosinus):
 		{
-			polynomial tmp;
+			polynomial tmp{};
 			tmp.other = "-sin(" + branch[0].content + ")";
 			wy = (branch[0].diriv() * tmp);
 			return wy;
@@ -159,7 +175,7 @@ public:
 			break;
 		case (action::ln):
 		{
-			polynomial tmp;
+			polynomial tmp{};
 			if (branch[0].algebralic().other.length() > 0) { //multi dote code, objectivly objective code
 			
 			}
