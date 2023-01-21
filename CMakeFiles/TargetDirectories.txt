@@ -1,0 +1,3 @@
+C:/Users/Administrator/Downloads/BookCpp-master/Kalkulator/CMakeFiles/Kalkulator_AK.dir
+C:/Users/Administrator/Downloads/BookCpp-master/Kalkulator/CMakeFiles/ALL_BUILD.dir
+C:/Users/Administrator/Downloads/BookCpp-master/Kalkulator/CMakeFiles/ZERO_CHECK.dir
