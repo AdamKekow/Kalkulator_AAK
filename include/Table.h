@@ -11,7 +11,11 @@ public:
 	Name content{};
 	action ac { action::TreeEnd};
 	std::vector<TreePart> branch{};
-
+	/////////////////////////////////////////////
+	//Input Name (string), user input preprocesed to remove undefined behaviour
+	/////////////////////////////////////////////
+	//Output tree structure with action information
+	/////////////////////////////////////////////
 	void cut() {
 		TreePart wy,wy2;
 		for (auto i = 0; i < (int)(action::TreeEnd); i++) {
@@ -96,7 +100,11 @@ public:
 		}
 		
 	}
-
+	/////////////////////////////////////////////
+	//Input TreePart tree structure
+	/////////////////////////////////////////////
+	//Output direvetive assemby of mathematic input
+	/////////////////////////////////////////////
 	polynomial diriv() {
 		polynomial wy{};
 		switch (ac)
@@ -199,6 +207,11 @@ public:
 	
 	
 	}
+	/////////////////////////////////////////////
+	//Input TreePart tree structure
+	/////////////////////////////////////////////
+	//Output Algebraic assemby of mathematic input
+	/////////////////////////////////////////////
 	polynomial algebralic() {
 		polynomial wy{};
 		switch (ac)
