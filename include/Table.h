@@ -152,8 +152,12 @@ public:
 				}
 				else 
 				{
-
+					return wy;
 				}
+			}
+			else
+			{
+				return wy;
 			}
 			break;
 		case (action::sinus):
@@ -233,12 +237,28 @@ public:
 			wy = branch[0].algebralic() ^ branch[1].algebralic();
 			return wy;
 		case (action::sinus):
-			wy.other=content;
+		{
+			std::stringstream ss;
+			ss << "+sin(" << branch[0].algebralic() << ")";
+			wy.other = ss.str();
 			return wy;
+		}
 			break;
 		case (action::cosinus):
-			wy.other = content;
+		{
+			std::stringstream ss;
+			ss << "+cos(" << branch[0].algebralic() << ")";
+			wy.other = ss.str();
 			return wy;
+		}
+			break;
+		case (action::ln):
+			{
+			std::stringstream ss;
+			ss << "+ln(" << branch[0].algebralic() << ")";
+			wy.other = ss.str();
+			return wy;
+			}
 			break;
 		default:
 			break;
@@ -249,15 +269,4 @@ public:
 	}
 
 };
-/*
-std::vector<Name> Cut(Name in){
-	std::vector<Name> wy;
-	int nawiasy=0;
-	for (int i = 0; i < in.length(); i++) {
-	
-	2*x+sin(2x+1)
-	}
-	return wy;
-}
-*/
 
