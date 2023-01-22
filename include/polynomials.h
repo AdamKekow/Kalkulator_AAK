@@ -19,7 +19,7 @@ bool first_smaller_power(polynomial::Number_power_pair i, polynomial::Number_pow
 polynomial operator+(const polynomial& in1, const polynomial& in2) {
 	polynomial out;
 
-	out.other = in1.other + in2.other;
+	out.other = in1.other + "+" + in2.other;
 	auto size1 = in1.poly.size();
 	auto size2 = in2.poly.size();
 	if (size1 == 0) {
