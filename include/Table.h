@@ -3,10 +3,10 @@
 using Name = std::string; //Mo¿e polski nie powinien byæ wykluczany z programowania? wstring czeka na lepsze czasy
 #include "polynomials.h"
 
-Name mapa[] = { "-","+","/","*","^","sin","cos","ln" };
+Name mapa[] = { "-","+","/","*","^","sin","cos","ln","ctg","tg"};
 class TreePart {
 public:
-	enum class action {  minus, plus,  divide, multiply, power, sinus, cosinus, ln,  TreeEnd,Bracket };
+	enum class action {  minus, plus,  divide, multiply, power, sinus, cosinus, ln, cotan,tan , TreeEnd };
 	
 	Name content{};
 	action ac { action::TreeEnd};
@@ -76,6 +76,14 @@ public:
 						break;
 					case (int)(action::cosinus):
 						ac = action::cosinus;
+						wy.content.insert(0, content.substr(3, content.length()));
+						break;
+					case (int)(action::tan) :
+						ac = action::tan;
+						wy.content.insert(0, content.substr(2, content.length()));
+						break;
+					case (int)(action::cotan) :
+						ac = action::cotan;
 						wy.content.insert(0, content.substr(3, content.length()));
 						break;
 					case (int)(action::ln):
@@ -209,6 +217,20 @@ public:
 			wy = (branch[0].diriv() * tmp);
 			return wy;
 		}
+		case (action::cotan):
+		{
+			polynomial tmp{};
+			tmp.other = "-sin(" + branch[0].content + ")^2";
+			wy = (branch[0].diriv() / tmp);
+			return wy;
+		}
+		case (action::tan):
+		{
+			polynomial tmp{};
+			tmp.other = "cos(" + branch[0].content + ")^2";
+			wy = (branch[0].diriv() / tmp);
+			return wy;
+		}
 			break;
 		case (action::ln):
 		{
@@ -303,6 +325,22 @@ public:
 			return wy;
 		}
 			break;
+		case (action::tan):
+		{
+			std::stringstream ss;
+			ss << "+tg(" << branch[0].algebralic() << ")";
+			wy.other = ss.str();
+			return wy;
+		}
+		break;
+		case (action::cotan):
+		{
+			std::stringstream ss;
+			ss << "+ctg(" << branch[0].algebralic() << ")";
+			wy.other = ss.str();
+			return wy;
+		}
+		break;
 		case (action::ln):
 			{
 			std::stringstream ss;
