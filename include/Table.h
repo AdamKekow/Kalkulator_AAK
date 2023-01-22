@@ -1,5 +1,5 @@
 #pragma once
-
+#define max_depth 128 //defines max depth off tree structure
 using Name = std::string; //Mo¿e polski nie powinien byæ wykluczany z programowania? wstring czeka na lepsze czasy
 #include "polynomials.h"
 
@@ -102,18 +102,24 @@ public:
 		switch (ac)
 		{
 		case (action::TreeEnd):
-			if (content.find_first_of("x") != Name::npos) {
-				Name tmp;
-				polynomial::Number_power_pair tmp2;
-				tmp = content;
-				tmp.erase(remove(tmp.begin(), tmp.end(), 'x'), tmp.end());//remove x
-				tmp2.power = 0.0;
-				tmp2.number = 1.0;
-				if (tmp.size() != 0) tmp2.number = stod(tmp);
-				wy.poly.push_back(tmp2);
-				return wy;
+			if(content.find_first_not_of("x0123456789.")== Name::npos){
+				if (content.find_first_of("x") != Name::npos) {
+					Name tmp;
+					polynomial::Number_power_pair tmp2;
+					tmp = content;
+					tmp.erase(remove(tmp.begin(), tmp.end(), 'x'), tmp.end());//remove x
+					tmp2.power = 0.0;
+					tmp2.number = 1.0;
+					if (tmp.size() != 0) tmp2.number = stod(tmp);
+					wy.poly.push_back(tmp2);
+					return wy;
+				}
+				else {
+					return wy;
+				}
 			}
-			else {
+			else 
+			{
 				return wy;
 			}
 			break;
@@ -198,23 +204,30 @@ public:
 		switch (ac)
 		{
 		case (action::TreeEnd):
-			if (content.find_first_of("x") != Name::npos) {
-				Name tmp;
-				polynomial::Number_power_pair tmp2;
-				tmp = content;
-				tmp.erase(remove(tmp.begin(), tmp.end(), 'x'), tmp.end());//remove x
-				tmp2.power = 1.0;
-				tmp2.number = 1.0;
-				if (tmp.size() != 0) tmp2.number = stod(tmp);
-				wy.poly.push_back(tmp2);
-				return wy;
+			if (content.find_first_not_of("x0123456789.") == Name::npos) {
+				if (content.find_first_of("x") != Name::npos) {
+					Name tmp;
+					polynomial::Number_power_pair tmp2;
+					tmp = content;
+					tmp.erase(remove(tmp.begin(), tmp.end(), 'x'), tmp.end());//remove x
+					tmp2.power = 1.0;
+					tmp2.number = 1.0;
+					if (tmp.size() != 0) tmp2.number = stod(tmp);
+					wy.poly.push_back(tmp2);
+					return wy;
+				}
+				else {
+					polynomial::Number_power_pair tmp2;
+					tmp2.power = 0.0;
+					tmp2.number = 0.0;
+					if (content.size() != 0) tmp2.number = stod(content);
+					wy.poly.push_back(tmp2);
+					return wy;
+				}
 			}
-			else {
-				polynomial::Number_power_pair tmp2;
-				tmp2.power = 0.0;
-				tmp2.number = 0.0;
-				if (content.size() != 0) tmp2.number = stod(content);
-				wy.poly.push_back(tmp2);
+			else 
+			{
+				wy.other = content;
 				return wy;
 			}
 			break;
