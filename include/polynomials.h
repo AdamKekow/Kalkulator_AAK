@@ -12,7 +12,6 @@ public:
 	};
 	std::vector<Number_power_pair> poly{};
 	Name other{};
-
 };
 bool first_smaller_power(polynomial::Number_power_pair i, polynomial::Number_power_pair j) { return (i.power < j.power); }
 //bool operator== (const polynomial::Number_power_pair& i,const polynomial::Number_power_pair& j) { return (i.power == j.power); }
@@ -224,4 +223,9 @@ polynomial operator^(const polynomial& in1, polynomial in2) {
 	std::sort(out.poly.begin(), out.poly.end(), first_smaller_power);
 
 	return out;
+}
+Name printName(polynomial input) {
+	std::stringstream ss;
+	ss << input;
+	return ss.str();
 }

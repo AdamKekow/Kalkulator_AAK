@@ -198,6 +198,13 @@ public:
 					return wy;
 				}
 			}
+			else if (branch[0].algebralic().other == "e")
+			{
+				polynomial tmp{};
+				tmp.other = "e^" + printName(branch[1].algebralic());
+				wy = branch[1].diriv() * tmp;
+				return wy;
+			}
 			else
 			{
 				return wy;
