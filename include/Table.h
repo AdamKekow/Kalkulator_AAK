@@ -17,10 +17,25 @@ public:
 	//Output tree structure with action information
 	/////////////////////////////////////////////
 	void cut() {
+		if (content[0] == '-' || content[0] == '+') content = "0" + content;//fix sign at start
 		TreePart wy,wy2;
 		for (auto i = 0; i < (int)(action::TreeEnd); i++) {
-			std::size_t found = content.find(mapa[i]);
+			std::size_t found = content.find(mapa[i]);//maybe revers find?
 			if (found != Name::npos) {
+				if (i == (int)action::divide)//order fix
+				{
+					std::size_t found2 = content.find(mapa[(int)action::multiply]);
+					int brackets = 0;
+					for (int ii = 0; ii < found2 + 1; ii++) {
+						if (content[ii] == '(')brackets++;
+						if (content[ii] == ')')brackets--;
+					}
+					if ((found2 > found) && (brackets == 0)&&(found2!=Name::npos))
+					{
+						found = found2;
+						i = (int)action::multiply;
+					}
+				}
 				int brackets = 0;
 				for (int ii = 0; ii < found+1; ii++) {
 					if (content[ii] == '(')brackets++;
@@ -223,6 +238,7 @@ public:
 					polynomial::Number_power_pair tmp2;
 					tmp = content;
 					tmp.erase(remove(tmp.begin(), tmp.end(), 'x'), tmp.end());//remove x
+					tmp.erase(remove(tmp.begin(), tmp.end(), '+'), tmp.end());
 					tmp2.power = 1.0;
 					tmp2.number = 1.0;
 					if (tmp.size() != 0) tmp2.number = stod(tmp);
@@ -230,10 +246,13 @@ public:
 					return wy;
 				}
 				else {
+					Name tmp;
 					polynomial::Number_power_pair tmp2;
+					tmp = content;
 					tmp2.power = 0.0;
 					tmp2.number = 0.0;
-					if (content.size() != 0) tmp2.number = stod(content);
+					tmp.erase(remove(tmp.begin(), tmp.end(), '+'), tmp.end());
+					if (tmp.size() != 0) tmp2.number = stod(tmp);
 					wy.poly.push_back(tmp2);
 					return wy;
 				}
