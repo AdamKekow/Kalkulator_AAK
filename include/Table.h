@@ -16,7 +16,7 @@ public:
 		TreePart wy,wy2;
 		for (auto i = 0; i < (int)(action::TreeEnd); i++) {
 			std::size_t found = content.find(mapa[i]);
-			if (found != std::string::npos) {
+			if (found != Name::npos) {
 				int brackets = 0;
 				for (int ii = 0; ii < found+1; ii++) {
 					if (content[ii] == '(')brackets++;
@@ -82,14 +82,14 @@ public:
 		}
 		if (wy.content.length() > 0) {
 			std::size_t found = wy.content.find_first_not_of("x0123456789.");
-			if (found != std::string::npos) {
+			if (found != Name::npos) {
 				wy.cut();
 			}
 			branch.push_back(wy);
 		}
 		if (wy2.content.length() > 0) {
 			std::size_t found = wy2.content.find_first_not_of("x0123456789.");
-			if (found != std::string::npos) {
+			if (found != Name::npos) {
 				wy2.cut();
 			}
 			branch.push_back(wy2);
@@ -102,8 +102,8 @@ public:
 		switch (ac)
 		{
 		case (action::TreeEnd):
-			if (content.find_first_of("x") != std::string::npos) {
-				std::string tmp;
+			if (content.find_first_of("x") != Name::npos) {
+				Name tmp;
 				polynomial::Number_power_pair tmp2;
 				tmp = content;
 				tmp.erase(remove(tmp.begin(), tmp.end(), 'x'), tmp.end());//remove x
