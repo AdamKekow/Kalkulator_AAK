@@ -58,11 +58,17 @@ public:
 						ac = action::divide;
 						wy.content.insert(0, content.substr(0, found));
 						wy2.content.insert(0, content.substr(found + 1, content.length()));
+						if(wy2.content==wy.content) //remove sin(x)/sin(x)=1
+						{
+							ac = action::TreeEnd;
+							content = 1;
+						}
 						break;
 					case (int)(action::multiply):
 						ac = action::multiply;
 						wy.content.insert(0, content.substr(0, found));
 						wy2.content.insert(0, content.substr(found + 1, content.length()));
+						if ((wy2.content == "0") || (wy.content == "0"))ac = action::TreeEnd;
 						break;
 					case (int)(action::sinus):
 						ac = action::sinus;
@@ -312,6 +318,16 @@ public:
 		return wy;
 	
 	}
-
+	/////////////////////////////////////////////
+	//Input tree with exess information
+	/////////////////////////////////////////////
+	//Output tree structure without clutter
+	/////////////////////////////////////////////
+	void optimize() {
+	
+	
+	
+	
+	}
 };
 
