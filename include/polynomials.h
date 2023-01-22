@@ -124,9 +124,16 @@ polynomial operator*(const polynomial& in1, polynomial in2) {
 		out.other = out.other + ss.str();
 	}
 	else if ((in1.other.length() == 0) && (in2.other.length() > 0)) {
-		std::stringstream ss;
-		ss << "+(" << in1 << ")*(" << in2.other << ")";
-		out.other = out.other + ss.str();
+		if ((in1.poly[0].power == 0.0) && (in1.poly[0].number == 1.0) && (in1.poly.size() == 1)) 
+		{
+			out = in2;
+		}
+		else
+		{
+			std::stringstream ss;
+			ss << "+(" << in1 << ")*(" << in2.other << ")";
+			out.other = out.other + ss.str();
+		}
 	}
 	auto size1 = in1.poly.size();
 	auto size2 = in2.poly.size();
