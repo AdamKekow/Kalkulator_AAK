@@ -9,11 +9,11 @@
 
 
 
-const Name kWelcomeString{ R"(==========================================
-Welcome to derivative calculator
-Written by Adam Andrzej Keków 2023
-==========================================
-)" };
+const Name kWelcomeString= "==========================================\n"
+"Welcome to derivative calculator\n"
+"Written by Adam Andrzej Kek\xA2w 2023\n"
+"==========================================\n"
+ ;
 
 void Run(void) {
 	/*
